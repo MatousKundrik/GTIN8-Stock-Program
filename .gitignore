@@ -1,6 +1,7 @@
 # program data files
 products.txt
 stockfile.txt
+.idea/
 
 # Windows image file caches
 Thumbs.db
