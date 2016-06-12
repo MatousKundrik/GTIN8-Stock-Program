@@ -62,6 +62,9 @@ parseproductfile()
 while True:
     while True:
         code = input("Please enter your GTIN-8 tag:")
+        if len(code) != 8 or not code.isdigit():
+            print("Please enter 8 digits")
+            continue
 
         codelist = list(code)
         if len(codelist) != 8:
