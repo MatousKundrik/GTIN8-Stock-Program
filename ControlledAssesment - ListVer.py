@@ -5,17 +5,19 @@ price_dict = dict()
 order_dict = dict()
 productname_dict = dict()
 
+
 def parseproductline(productline, column):
     columns = productline.split("\t")
     return columns[column - 1]
 
+
 def parseproductfile():
-    with open ("products.txt","r") as parsefile:
+    with open("products.txt", "r") as parsefile:
         for line in parsefile:
             line = line.replace("\n", "")
-            productcode = parseproductline(line,1)
-            productname = parseproductline(line,2)
-            productprice = parseproductline(line,3)
+            productcode = parseproductline(line, 1)
+            productname = parseproductline(line, 2)
+            productprice = parseproductline(line, 3)
             if productcode != "GTIN - 8":
                 price_dict[productcode] = float(productprice)
             productname_dict[productcode] = productname
@@ -26,7 +28,7 @@ def final_write(stocknumber, ordernumber, code):
     d = f.readlines()
     f.seek(0)
     for i in d:
-        if i != str(code) + "    " + str(int(stocknumber) + ordernumber) +"\n":
+        if i != str(code) + "    " + str(int(stocknumber) + ordernumber) + "\n":
             f.write(i)
     f.truncate()
     f.close()
@@ -35,12 +37,13 @@ def final_write(stocknumber, ordernumber, code):
 
 
 def reciet(productname, ordernumber, printatend):
-    if printatend == True:
+    if printatend is True:
 
-        total=0
+        total = 0
         for code in order_dict.keys():
-            print(code + "    " + productname_dict[code] + "    £" + str(price_dict[code]) + "    " + str(order_dict[code]))
-            total+=price_dict[code] * order_dict[code]
+            print(code + "    " + productname_dict[code] + "    £" +
+                  str(price_dict[code]) + "    " + str(order_dict[code]))
+            total += price_dict[code] * order_dict[code]
         print("Total: £ " + str(total))
 
 
