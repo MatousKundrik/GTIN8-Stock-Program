@@ -33,20 +33,16 @@ def final_write(stocknumber, ordernumber, code):
     with open("stockfile.txt", "a") as myfile:
         myfile.write(str(code) + "    " + str(stocknumber) + "\n")
 
-def reciet(productname, ordernumber, printatend):     ############
-    #productname = productname.replace("\n", "")
-    #recietlist.append(productname + "    " + str(ordernumber))
-    #with open ("reciet.txt", "a") as recietfile:
+
+def reciet(productname, ordernumber, printatend):
     if printatend == True:
 
         total=0
         for code in order_dict.keys():
             print(code + "    " + productname_dict[code] + "    £" + str(price_dict[code]) + "    " + str(order_dict[code]))
-            #code = line[:8]
             total+=price_dict[code] * order_dict[code]
         print("Total: £ " + str(total))
 
-    
 
 def should_continue(carryon):
     if carryon == "Y" or carryon == "y":
@@ -102,12 +98,10 @@ while True:
 
                                             final_write(stocknumber, ordernumber, code)
                                             if code in order_dict:
-                                                ordernumber+=order_dict[code]
+                                                ordernumber += order_dict[code]
                                             order_dict[code] = ordernumber
 
                                             should_continue(input("Would you like to order more items? Y/N: "))
-                                            
-
 
                                     elif whattodo == "restock":
                                         ordernumber = input("How many would you like to restock? :")
@@ -121,4 +115,4 @@ while True:
         continue
     else:
         print("This GTIN-8 tag is invalid.")
-        continue                #['34512340    102\n', '56756777    12\n', '90673412    8']
+        continue
